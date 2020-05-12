@@ -7,6 +7,10 @@ using TMPro;
 
 public class SliderControl : MonoBehaviour
 {
+    private ValueControlCenter valueControlCenter;
+    private StartSliderTask startSliderTask;
+    private AudioSource clickSound;
+
     public TextMeshProUGUI zahlAufgabe;
     public TextMeshProUGUI anzahlFehler;
     public TextMeshProUGUI nummerDerAufgabe;
@@ -25,15 +29,20 @@ public class SliderControl : MonoBehaviour
     private int fehlercounter;
     private int aufgabenNr;
 
-    public float feedbackTime;
-    public int anzahlAufgaben;
-    public int endOfScale;
-
-    public bool isTochpadEnabled;
+    private int endOfScale;
 
     private Vector3 lastMouseCoordinate = Vector3.zero;
     // public Slider slider;
     private bool selected = false;
+
+    private void Awake() //intiate all variables which are set in different scripts
+    {
+        valueControlCenter = GameObject.Find("SliderControl").GetComponent<ValueControlCenter>();
+        startSliderTask = GameObject.Find("SliderControl").GetComponent<StartSliderTask>();
+        clickSound = GameObject.Find("ClickSound").GetComponent<AudioSource>();
+
+        endOfScale = startSliderTask.endOfScale;
+    }
 
     void Start()
     {
@@ -43,23 +52,31 @@ public class SliderControl : MonoBehaviour
         fehlercounter = 0;
         aufgabenNr = 1;
 
-        if(isTochpadEnabled == false){
+        if(valueControlCenter.touchpadInput == false){
             ColorBlock colorVar = valueSlider.colors;
             colorVar.selectedColor = new Color(1f, 0.8509804f, 0.4f, 1);
             valueSlider.colors = colorVar;
             valueSlider.Select();
         }
+
+        if (valueControlCenter.touchpadInput == true) // If the trackpad is used, the cursor will be reset to the middle of the screen each cursorResetTime - seconds
+        {
+            InvokeRepeating("CursorLock", valueControlCenter.cursorResetTime, valueControlCenter.cursorResetTime);  
+        }
     }
 
     void handleTouchpadInput(){
         Vector3 mouseDelta = Input.mousePosition - lastMouseCoordinate;
-        if(Input.GetMouseButtonDown(0)){
+        if(Input.GetMouseButtonDown(0) && selected == false)
+        {
             valueSlider.Select();
             selected = true;
-        }  else if(Input.GetMouseButtonUp(0)) {
+        }  else if(Input.GetMouseButtonDown(0) && selected == true)
+        {
             selected = false;
             EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(null);
             Comparision();
+            clickSound.Play();
         }
         if(mouseDelta.x < 0 ){ // if difference less than zero, moved to left
             lastMouseCoordinate = Input.mousePosition; // reseting the last mouse coordinate to the new location
@@ -78,11 +95,12 @@ public class SliderControl : MonoBehaviour
         zahlAufgabe.text = aufgabenstellung.ToString();
         anzahlFehler.text = fehlercounter.ToString();
         nummerDerAufgabe.text = aufgabenNr.ToString();
-        maxAnzahlAufgabe.text = anzahlAufgaben.ToString();
+        maxAnzahlAufgabe.text = valueControlCenter.numberOfTasks.ToString();
 
         endOfScaleText.text = endOfScale.ToString();
         handleNumber.text = valueSlider.value.ToString();
-        if(isTochpadEnabled == true){
+        if(valueControlCenter.touchpadInput == true){
+            CursorUnlock();
             handleTouchpadInput();
         }
     }
@@ -92,7 +110,7 @@ public class SliderControl : MonoBehaviour
         if (valueSlider.value == aufgabenstellung){
             StartCoroutine(FeedbackCorrect());
             aufgabenNr++;
-            if (aufgabenNr >= anzahlAufgaben){
+            if (aufgabenNr >= valueControlCenter.numberOfTasks){
                 EndScreen();
             }
             NeueAufgabenstellung();
@@ -103,13 +121,13 @@ public class SliderControl : MonoBehaviour
 
         IEnumerator FeedbackCorrect(){
             panelCorrect.SetActive(true);
-            yield return new WaitForSecondsRealtime(feedbackTime);
+            yield return new WaitForSecondsRealtime(valueControlCenter.feedbackPanelTime);
             panelCorrect.SetActive(false);
         }
 
         IEnumerator FeedbackWrong(){
             panelWrong.SetActive(true);
-            yield return new WaitForSecondsRealtime(feedbackTime);
+            yield return new WaitForSecondsRealtime(valueControlCenter.feedbackPanelTime);
             panelWrong.SetActive(false);
         }
     }
@@ -123,5 +141,19 @@ public class SliderControl : MonoBehaviour
 
     public void EndScreen(){
         endPanel.SetActive(true);
+    }
+
+    private void CursorLock() //reset the Cursor by first locking it with this function and unlock it with the next on
+    {
+            Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void CursorUnlock()
+    {
+        if (Cursor.lockState == CursorLockMode.Locked) // If Cursor is Locked, unlock it to reset in the middle of the screen
+        {
+            Cursor.lockState = CursorLockMode.None;
+            lastMouseCoordinate = Input.mousePosition; //prevent the false recognition of cursor reset as a swipe
+        }
     }
 }

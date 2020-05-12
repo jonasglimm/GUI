@@ -1,0 +1,31 @@
+﻿<Properties StartupConfiguration="{5F15FCCB-4B0C-D2DD-780F-967F0737A03F}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MeineDaten/Scripts/TouchInput.cs">
+    <Files>
+      <File FileName="Assets/MeineDaten/Scripts/AuswahlAufgabe/AuswahlControl.cs" Line="1" Column="1" />
+      <File FileName="Assets/MeineDaten/Scripts/TouchInput.cs" Line="16" Column="6" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="20200505_GUI-Test V1.0" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="MeineDaten" expanded="True">
+                <Node name="Scripts" expanded="True">
+                  <Node name="AuswahlAufgabe" expanded="True" />
+                  <Node name="TouchInput.cs" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="5ae6cf0c-2588-454b-b57e-59b3e8e4b85a" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

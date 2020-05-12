@@ -60,8 +60,10 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     private List<Image> _pageSelectionImages;
 
     private Vector3 lastMouseCoordinate = Vector3.zero;
-    private bool swipeInProgress = false;
+    private bool swipeInProgress;
     public float swipeMovementX = 8f ;
+
+    public AudioSource scrollingSound;
 
     //------------------------------------------------------------------------
     void Start() {
@@ -232,11 +234,13 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     //------------------------------------------------------------------------
     private void NextScreen() {
         LerpToPage(_currentPage + 1);
+        scrollingSound.Play();
     }
 
     //------------------------------------------------------------------------
     private void PreviousScreen() {
         LerpToPage(_currentPage - 1);
+        scrollingSound.Play();
     }
 
     //------------------------------------------------------------------------

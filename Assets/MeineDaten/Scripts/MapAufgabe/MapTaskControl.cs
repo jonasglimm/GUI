@@ -32,9 +32,16 @@ public class MapTaskControl : MonoBehaviour
     private int aufgabenNr;
     private string gesuchteMarkierung;
 
-    public float activeTime = 0.5f;
-    public int anzahlAufgaben = 4;
+    private ValueControlCenter valueControlCenter;
+    private MapControl mapControl;
+    private AudioSource clickSound;
 
+    private void Awake()
+    {
+        valueControlCenter = GameObject.Find("MapManager").GetComponent<ValueControlCenter>();
+        mapControl = GameObject.Find("MapManager").GetComponent<MapControl>();
+        clickSound = GameObject.Find("MapManager").GetComponent<AudioSource>();
+    }
 
     void Start()
     {
@@ -47,22 +54,18 @@ public class MapTaskControl : MonoBehaviour
         taskSouth = taskEast = taskWest = false;
         aufgabenNr = 1;
         gesuchteMarkierung = "Markierung im Norden!";
-
     }
 
     void Update()
     {
-
         nameAufgabe.GetComponent<TextMeshProUGUI>().text = gesuchteMarkierung;
         nummerDerAufgabe.GetComponent<TextMeshProUGUI>().text = aufgabenNr.ToString();
-        maxAnzahlAufgabe.GetComponent<TextMeshProUGUI>().text = anzahlAufgaben.ToString();
+        maxAnzahlAufgabe.GetComponent<TextMeshProUGUI>().text = valueControlCenter.numberOfTasks.ToString();
 
-
- 
-    
         if (taskNorth == true && pinNorth.GetComponent<PinNorthCollider>().pinNorthEntered == true)
         {
             StartCoroutine(FeedbackCorrect());
+            clickSound.Play();
             taskNorth = false;
             pinNorth.SetActive(false);
             taskEast = true;
@@ -75,6 +78,7 @@ public class MapTaskControl : MonoBehaviour
         if (taskEast == true && pinEast.GetComponent<PinEastCollider>().pinEastEntered == true)
         {
             StartCoroutine(FeedbackCorrect());
+            clickSound.Play();
             taskEast = false;
             pinEast.SetActive(false);
             taskWest = true;
@@ -82,12 +86,12 @@ public class MapTaskControl : MonoBehaviour
 
             gesuchteMarkierung = "Markierung im Westen!";
             aufgabenNr++;
-
         }
 
         if (taskWest == true && pinWest.GetComponent<PinWestCollider>().pinWestEntered == true)
         {
             StartCoroutine(FeedbackCorrect());
+            clickSound.Play();
             taskWest = false;
             pinWest.SetActive(false);
             taskSouth = true;
@@ -100,6 +104,7 @@ public class MapTaskControl : MonoBehaviour
         if (taskSouth == true && pinSouth.GetComponent<PinSouthCollider>().pinSouthEntered == true)
         {
            StartCoroutine(FeedbackCorrect());
+            clickSound.Play();
             taskSouth = false;
             pinSouth.SetActive(false);
 
@@ -111,7 +116,7 @@ public class MapTaskControl : MonoBehaviour
     IEnumerator FeedbackCorrect()
     {
         panelCorrect.SetActive(true);
-        yield return new WaitForSecondsRealtime(activeTime);
+        yield return new WaitForSecondsRealtime(valueControlCenter.feedbackPanelTime);
         panelCorrect.SetActive(false);
     } 
 
@@ -119,5 +124,16 @@ public class MapTaskControl : MonoBehaviour
     {
         pointer.SetActive(false);
         endPanel.SetActive(true);
+
+        if(valueControlCenter.touchpadInput == true)
+        {
+            mapControl.CancelInvoke();
+            ShowCursor();
+        }
+    }
+
+    private void ShowCursor()
+    {
+        Cursor.visible = true;
     }
 }

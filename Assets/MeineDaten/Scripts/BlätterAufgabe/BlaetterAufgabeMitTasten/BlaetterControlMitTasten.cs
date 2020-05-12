@@ -30,9 +30,19 @@ public class BlaetterControlMitTasten : MonoBehaviour
     private int aufgabenNr;
     private int pagesLength;
 
-    public float activeTime = 0.5f;
-    public int anzahlAufgaben = 5;
+    private float activeTime = 0.5f; //set in ValueControlCenter
+    private int anzahlAufgaben = 5; //set in ValueControlCenter
 
+    [Header("All values set in:")]
+    public ValueControlCenter valueControlCenter;
+
+    public AudioSource clickSound;
+
+    private void Awake()
+    {
+        activeTime = valueControlCenter.feedbackPanelTime;
+        anzahlAufgaben = valueControlCenter.numberOfTasks;
+    }
 
     void Start()
     {
@@ -40,7 +50,6 @@ public class BlaetterControlMitTasten : MonoBehaviour
         SetGesuchteSeite();
         fehlercounter = 0;
         aufgabenNr = 1;
-
     }
 
     private void Update()
@@ -49,10 +58,11 @@ public class BlaetterControlMitTasten : MonoBehaviour
         anzahlFehler.GetComponent<TextMeshProUGUI>().text = fehlercounter.ToString();
         nummerDerAufgabe.GetComponent<TextMeshProUGUI>().text = aufgabenNr.ToString();
         maxAnzahlAufgabe.GetComponent<TextMeshProUGUI>().text = anzahlAufgaben.ToString();
-        if(blaetterRectMovement.isTrackpadEnabled == true){
+        if(valueControlCenter.touchpadInput == true){
             if(Input.GetMouseButtonDown(0)){
                 Comparision(blaetterRectMovement.buttonText[0]);
                 blaetterRectMovement.selectedButton.Select();
+                clickSound.Play();
             }
         }
         

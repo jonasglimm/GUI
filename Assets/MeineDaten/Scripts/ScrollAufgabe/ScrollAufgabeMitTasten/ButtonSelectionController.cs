@@ -30,7 +30,7 @@ public class ButtonSelectionController : MonoBehaviour
     */
 
     public void SetUp() // not using Start() because array of Buttons needs to be intiated before this SetUp() calls.
-        //Gets called from ButtonListControlMitTasten - Script
+        //Gets called from ButtonListControl - Script
     {
         m_scrollRect = GetComponent<ScrollRect>();
         m_buttons = GetComponentsInChildren<Button>();

@@ -678,8 +678,6 @@ MonoBehaviour:
   maxAnzahlAufgabe: {fileID: 689120636}
   panelCorrect: {fileID: 203637424}
   endPanel: {fileID: 761420473}
-  activeTime: 0.5
-  anzahlAufgaben: 4
 --- !u!4 &239371252
 Transform:
   m_ObjectHideFlags: 0
@@ -713,7 +711,6 @@ MonoBehaviour:
   boundries2: {x: 14.4, y: 10.5, z: -6}
   boundries3: {x: 11.9, y: 9.1, z: -9}
   boundries4: {x: 10.2, y: 8, z: -11}
-  isTrackpadEnabled: 1
 --- !u!1 &344328502
 GameObject:
   m_ObjectHideFlags: 0
@@ -1915,12 +1912,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VisibleArea: {fileID: 0}
-  Dampening: 0.5
+  Dampening: 0.8
   RotationSpeed: 0
   ScaleThreshold: 0.15
   TapToCenterLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
 --- !u!1001 &1220617875
 PrefabInstance:
   m_ObjectHideFlags: 0

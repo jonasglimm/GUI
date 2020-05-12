@@ -6,8 +6,12 @@ using TMPro;
 
 public class BlaetterControl : MonoBehaviour
 {
+    private ButtonListBlaettern buttonListBlaettern;
+    private ValueControlCenter valueControlCenter;
+    private BlaetterRectMovement blaetterRectMovement;
+    private AudioSource clickSound;
+
     // Gameobjects need to be assigned in the inspector in Unity
-    public ButtonListBlaettern buttonListBlaettern;
     public TextMeshProUGUI firstButtonText;
 
     // Creating gameobjects to run the task and count the amount of wrong actions
@@ -31,9 +35,20 @@ public class BlaetterControl : MonoBehaviour
     private int pagesLength;
 
     // Active time is the time in sec how long a feedback panel is shown
-    public float activeTime = 0.5f;
+    private float activeTime;
     // Number of tasks 
-    public int anzahlAufgaben = 5;
+    private int anzahlAufgaben;
+
+    private void Awake()
+    {
+        valueControlCenter = GameObject.Find("BlaetterManager").GetComponent<ValueControlCenter>();
+        clickSound = GameObject.Find("BlaetterManager").GetComponent<AudioSource>();
+        blaetterRectMovement = GameObject.Find("SnapOnScroll").GetComponent<BlaetterRectMovement>();
+        buttonListBlaettern = GameObject.Find("BlaetterManager").GetComponent<ButtonListBlaettern>();
+
+        activeTime = valueControlCenter.feedbackPanelTime;
+        anzahlAufgaben = valueControlCenter.numberOfTasks;
+    }
 
     void Start()
     {
@@ -52,6 +67,15 @@ public class BlaetterControl : MonoBehaviour
         anzahlFehler.GetComponent<TextMeshProUGUI>().text = fehlercounter.ToString();
         nummerDerAufgabe.GetComponent<TextMeshProUGUI>().text = aufgabenNr.ToString();
         maxAnzahlAufgabe.GetComponent<TextMeshProUGUI>().text = anzahlAufgaben.ToString();
+        if (valueControlCenter.touchpadInput == true)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Comparision(blaetterRectMovement.buttonText[0]);
+                blaetterRectMovement.selectedButton.Select();
+                clickSound.Play();
+            }
+        }
     }
 
     // Function to be assigned to each button (OnButtonClicked) - compares the name (number) of the button to the current task
@@ -112,9 +136,20 @@ public class BlaetterControl : MonoBehaviour
         gesuchteSeite = neueSeite;
     }
 
-    //actives the endpanel
+    //activates the endpanel
     public void EndScreen()
     {
         endPanel.SetActive(true);
+
+        if (valueControlCenter.touchpadInput == true)
+        {
+            blaetterRectMovement.CancelInvoke();
+            ShowCursor();
+        }
+    }
+
+    private void ShowCursor()
+    {
+        Cursor.visible = true;
     }
 }

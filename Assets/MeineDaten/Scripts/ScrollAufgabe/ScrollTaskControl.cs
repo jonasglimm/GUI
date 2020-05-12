@@ -7,6 +7,8 @@ using TMPro;
 public class ScrollTaskControl : MonoBehaviour
 {
     public ButtonListControl buttonListControl;
+    private ScrollRectMovement scrollRectMovement;
+    private ValueControlCenter valueControlCenter;
 
     public GameObject nameAufgabe;
     public GameObject anzahlFehler;
@@ -18,6 +20,8 @@ public class ScrollTaskControl : MonoBehaviour
     public GameObject endNachricht;
     public GameObject endPanel;
 
+    public AudioSource clickSound;
+
     private string gesuchterName;
     private string neuerName;
 
@@ -25,11 +29,19 @@ public class ScrollTaskControl : MonoBehaviour
     private int aufgabenNr;
     private int namesLength; 
 
-    public float activeTime = 0.5f;
-    public int anzahlAufgaben = 5;
+    private float activeTime;
+    private int anzahlAufgaben;
+
+    private void Awake()
+    {
+        valueControlCenter = GameObject.Find("ScrollManager").GetComponent<ValueControlCenter>();
+        scrollRectMovement = GameObject.Find("ButtonScrollList").GetComponent<ScrollRectMovement>();
+    }
 
     void Start()
     {
+        activeTime = valueControlCenter.feedbackPanelTime;
+        anzahlAufgaben = valueControlCenter.numberOfTasks;
         namesLength = buttonListControl.names.Length;
         gesuchterName = buttonListControl.names[Random.Range(0, namesLength)];
         fehlercounter = 0;
@@ -42,6 +54,16 @@ public class ScrollTaskControl : MonoBehaviour
         anzahlFehler.GetComponent<TMPro.TextMeshProUGUI>().text = fehlercounter.ToString();
         nummerDerAufgabe.GetComponent<TMPro.TextMeshProUGUI>().text = aufgabenNr.ToString();
         maxAnzahlAufgabe.GetComponent<TMPro.TextMeshProUGUI>().text = anzahlAufgaben.ToString();
+
+        if (valueControlCenter.touchpadInput == true)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Comparision(scrollRectMovement.buttonText[0]);
+                scrollRectMovement.selectedButton.Select();
+                clickSound.Play();
+            }
+        }
     }
 
     public void Comparision(TextMeshProUGUI buttonText)

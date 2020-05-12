@@ -7,6 +7,9 @@ using UnityEngine.EventSystems;
 
 public class AuswahlControl : MonoBehaviour
 {
+    private AuswahlTrackpad auswahlTrackpad;
+    private ValueControlCenter valueControlCenter;
+
     // Creating gameobjects to run the task and count the amount of wrong actions
     // Gameobject need to be assigned in the inspector in Unity
     public GameObject zahlAufgabe; 
@@ -29,13 +32,24 @@ public class AuswahlControl : MonoBehaviour
     private Button[] buttonList;
 
     // Active time is the time in sec how long a feedback panel is shown
-    public float activeTime = 0.5f;
+    private float activeTime; //set in ValueControlCenter
     // Number of tasks 
-    public int anzahlAufgaben = 5;
+    private int anzahlAufgaben; //set in ValueControlCenter
     // Different start set up if the task show be done using direct touch
-    public bool directTouchInput = true;
+    private bool directTouchInput; //set in ValueControlCenter
     // If no direct touch is used, startButton is the first button to be highlighted
-    public Button startButton;
+    private Button startButton; //set in ValueControlCenter
+
+    void Awake()
+    {
+        valueControlCenter = GameObject.Find("AufgabenManager").GetComponent<ValueControlCenter>();
+        auswahlTrackpad = GameObject.Find("AufgabenManager").GetComponent<AuswahlTrackpad>();
+
+        activeTime = valueControlCenter.feedbackPanelTime;
+        anzahlAufgaben = valueControlCenter.numberOfTasks;
+        directTouchInput = valueControlCenter.touchscreenInput;
+        startButton = valueControlCenter.startButton;
+    }
 
     void Start()
     {
@@ -44,21 +58,19 @@ public class AuswahlControl : MonoBehaviour
         fehlercounter = 0;
         aufgabenNr = 1;
 
-        // if no direct touch is used, the highlighted color is assigned to the selected status and the startButton is selected
-        // if (directTouchInput == false) 
-        // {
-        //     buttonList = FindObjectsOfType<Button>();
+        // if direct touch is used, the selected color is changed to blue
+         if (directTouchInput == true) 
+         {
+             buttonList = FindObjectsOfType<Button>();
 
-        //     for (var i = 0; i < buttonList.Length; i++ )
-        //     {
-        //         ColorBlock colorVar = buttonList[i].colors;
-        //         colorVar.selectedColor = new Color(1f, 0.8509804f, 0.4f, 1);
-        //         buttonList[i].colors = colorVar;
+             for (var i = 0; i < buttonList.Length; i++ )
+             {
+                 ColorBlock colorVar = buttonList[i].colors;
+                 colorVar.selectedColor = new Color(0.2666667f, 0.4470588f, 0.7686275f, 1);
+                 buttonList[i].colors = colorVar;
 
-        //     }
-
-        //     startButton.Select();
-        // }
+             }
+         }
     }
 
     //The correct text is assigned to the different textelements shown on the Canvas
@@ -120,5 +132,16 @@ public class AuswahlControl : MonoBehaviour
     public void EndScreen() {
         endPanel.SetActive(true);
         endNachricht.SetActive(true);
+
+        if (valueControlCenter.touchpadInput == true)
+        {
+            auswahlTrackpad.CancelInvoke();
+            ShowCursor();
+        }
+    }
+
+    private void ShowCursor()
+    {
+        Cursor.visible = true;
     }
 }

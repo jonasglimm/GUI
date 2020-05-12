@@ -14,13 +14,44 @@ public class AuswahlTrackpad : MonoBehaviour{
     private Button currentButton;
     private Vector3 lastMouseCoordinate = Vector3.zero; // used to store the last mose moved co-ordinates. Initialized with (0,0,0)
     private bool swipeInProgress = false;
-    public bool isTrackpadEnabled;
-    void Start()
+
+    private bool isTrackpadEnabled;
+    private bool touchscreenInput;
+    private bool iDriveInput;
+    private bool gestureInput;
+
+    private float cursorResetTime;
+
+    public ValueControlCenter valueControlCenter; 
+    public AudioSource clickSound; // for a click (only used for TouchpadInput - for Touch and iDrive it is played via onClick() of the button
+    public AudioSource scrollingSound;
+
+    void Awake()
     {
-        SelectButton(button1);
+        isTrackpadEnabled = valueControlCenter.touchpadInput;
+        touchscreenInput = valueControlCenter.touchscreenInput;
+        iDriveInput = valueControlCenter.iDriveInput;
+        gestureInput = valueControlCenter.gestureInput;
+
+        cursorResetTime = valueControlCenter.cursorResetTime;
     }
 
-    void SelectButton(Button btn){
+    void Start()
+    {
+        if (touchscreenInput == false)
+        {
+            SelectButton(valueControlCenter.startButton);
+
+            if (isTrackpadEnabled == true)
+            {
+                InvokeRepeating("CursorLock", cursorResetTime, cursorResetTime);  // If the trackpad is used, the cursor will be reset to the middle of the screen each cursorResetTime - seconds
+                HideCursor();
+            }
+        }
+    }
+
+    void SelectButton(Button btn)
+    {
         btn.Select(); 
         currentButton = btn;
     }
@@ -38,6 +69,7 @@ public class AuswahlTrackpad : MonoBehaviour{
             StartCoroutine(waiter(button5));
             // SelectButton(button5);
         }
+        scrollingSound.Play();
     }
 
     void moveRight(){
@@ -54,6 +86,7 @@ public class AuswahlTrackpad : MonoBehaviour{
             StartCoroutine(waiter(button6));
             // SelectButton(button6);
         }
+        scrollingSound.Play();
     }
 
     void moveUp(){
@@ -67,6 +100,7 @@ public class AuswahlTrackpad : MonoBehaviour{
             StartCoroutine(waiter(button3));
             // SelectButton(button3);
         }
+        scrollingSound.Play();
     }
 
     void moveDown(){
@@ -80,6 +114,7 @@ public class AuswahlTrackpad : MonoBehaviour{
             StartCoroutine(waiter(button6));
             // SelectButton(button6);
         }
+        scrollingSound.Play();
     }
     
     
@@ -91,16 +126,17 @@ public class AuswahlTrackpad : MonoBehaviour{
 
     // Update is called once per frame
     void Update()
-    {   
-        if(isTrackpadEnabled == true){
+    {
+        if (isTrackpadEnabled == true){
+            CursorUnlock(); // Unlock and reset Cursor if it is locked
             //handling trackpad swipe as input
             handleTrackpadGesture();
-        } else if(isTrackpadEnabled == false){
+        } else if(iDriveInput == true){
             //handling keyboard arrrow keys as input
             handleKeyboardInput();
         }
-        
-        
+
+
     }
     void handleTrackpadGesture(){
         Vector3 mouseDelta = Input.mousePosition - lastMouseCoordinate;
@@ -111,6 +147,7 @@ public class AuswahlTrackpad : MonoBehaviour{
         if(Input.GetMouseButtonDown(0)){
             AuswahlControl script = gameObject.GetComponent<AuswahlControl>();
             script.Comparision(currentButton);
+            clickSound.Play();
             SelectButton(currentButton);
         }
         if(mouseDeltaY < 0){
@@ -152,7 +189,7 @@ public class AuswahlTrackpad : MonoBehaviour{
                 }
             }
         } else if(mouseDeltaX == mouseDeltaY){
-            Debug.Log("inside false");
+            //Debug.Log("inside false");
             swipeInProgress = false;
         }
     }
@@ -175,5 +212,27 @@ public class AuswahlTrackpad : MonoBehaviour{
         }
 
         
+    }
+
+    private void CursorLock() //reset the Cursor by first locking it with this function and unlock it with the next on
+    {
+        if (swipeInProgress == false) //prevet interrupting a swipe
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
+    private void CursorUnlock()
+    {
+        if (Cursor.lockState == CursorLockMode.Locked) // If Cursor is Locked, unlock it to reset in the middle of the screen
+        {
+            Cursor.lockState = CursorLockMode.None;
+            lastMouseCoordinate = Input.mousePosition; //prevent the false recognition of cursor reset as a swipe
+        }
+    }
+
+    private void HideCursor()
+    {
+        Cursor.visible = false;
     }
 }

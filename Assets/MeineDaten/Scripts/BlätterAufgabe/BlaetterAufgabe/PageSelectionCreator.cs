@@ -11,7 +11,7 @@ public class PageSelectionCreator : MonoBehaviour
     public ButtonListBlaettern buttonListBlaettern;
 
     //Initiating as many page selection icons, as buttons are created
-    private void Start()
+    public void SetUp()
     {
         for (int i = 0; i < buttonListBlaettern.pages.Length; i++)
         {
