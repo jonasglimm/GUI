@@ -163,7 +163,7 @@ RectTransform:
   m_Children:
   - {fileID: 1326048593}
   m_Father: {fileID: 2080611334}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -400,7 +400,7 @@ PrefabInstance:
     - target: {fileID: 5454707782888324110, guid: 63618032dd96a4563a57ad722a14ef09,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5454707782888324110, guid: 63618032dd96a4563a57ad722a14ef09,
         type: 3}
@@ -518,14 +518,14 @@ RectTransform:
   m_GameObject: {fileID: 724710793}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.80758494, y: 0.74290395, z: 1.0010417}
+  m_LocalScale: {x: 1.5142217, y: 1.3929448, z: 1.876953}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 2080611334}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1189.9677, y: 756.13403}
+  m_AnchoredPosition: {x: 1271.1893, y: 697.75134}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &724710795
@@ -563,8 +563,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c482d12bcdf40aea4c3b1082f1ed8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonListBlaettern: {fileID: 724710795}
-  blaetterRectMovement: {fileID: 1960606707}
   firstButtonText: {fileID: 413952096}
   nameAufgabe: {fileID: 1131797853}
   anzahlFehler: {fileID: 1388156596}
@@ -604,7 +602,7 @@ MonoBehaviour:
   touchpadInput: 1
   iDriveInput: 0
   gestureInput: 0
-  timeForASwipe: 0.05
+  timeForASwipe: 0.001
   cursorResetTime: 0.3
   feedbackPanelTime: 0.5
   startButton: {fileID: 0}
@@ -762,7 +760,7 @@ PrefabInstance:
     - target: {fileID: 3305670148686694547, guid: 78c57297dcc8d41c19fe59d86d5ee023,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3305670148686694547, guid: 78c57297dcc8d41c19fe59d86d5ee023,
         type: 3}
@@ -1029,7 +1027,7 @@ PrefabInstance:
     - target: {fileID: 7683939421766685765, guid: b8364c90a62504b75bbe1490a0c82e2f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7683939421766685765, guid: b8364c90a62504b75bbe1490a0c82e2f,
         type: 3}
@@ -1166,7 +1164,7 @@ PrefabInstance:
     - target: {fileID: 2300406099875349935, guid: 82f774b1127454950a8b04d5a87b38d4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2300406099875349935, guid: 82f774b1127454950a8b04d5a87b38d4,
         type: 3}
@@ -1451,7 +1449,7 @@ PrefabInstance:
     - target: {fileID: 7135669346486580842, guid: ff612be121fd64ebfb65dce8b155b6e4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7135669346486580842, guid: ff612be121fd64ebfb65dce8b155b6e4,
         type: 3}
@@ -1906,13 +1904,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1960606699}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8067446, y: 0.74213094, z: 1}
   m_Children:
   - {fileID: 1615939935}
-  m_Father: {fileID: 2109117355}
-  m_RootOrder: 0
+  m_Father: {fileID: 2080611334}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2137,8 +2135,7 @@ MonoBehaviour:
   selectedPage: {fileID: 21300000, guid: 37f998097c14a45fab85d9b59a5e34a7, type: 3}
   pageSelectionIcons: {fileID: 198523012}
   buttonText: []
-  swipeMovementX: 8
-  valueControlCenter: {fileID: 724710798}
+  swipeMovementX: 20
   scrollingSound: {fileID: 1960606706}
 --- !u!1 &2080611330
 GameObject:
@@ -2231,6 +2228,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 2109117355}
+  - {fileID: 1960606700}
   - {fileID: 198523012}
   - {fileID: 1131797854}
   - {fileID: 1129018698}
@@ -2238,6 +2236,7 @@ RectTransform:
   - {fileID: 2107558603}
   - {fileID: 1388156597}
   - {fileID: 24513183}
+  - {fileID: 724710794}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2296,7 +2295,7 @@ PrefabInstance:
     - target: {fileID: 2160563714105856074, guid: 3d2a3baed9baa47e5978b7bb19772b71,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2160563714105856074, guid: 3d2a3baed9baa47e5978b7bb19772b71,
         type: 3}
@@ -2370,8 +2369,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1960606700}
+  m_Children: []
   m_Father: {fileID: 2080611334}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
