@@ -7,6 +7,7 @@ public class MapControl : MonoBehaviour
     private Camera mapCamera;
 
     public float speed = 5f;
+    public float zoomSpeed = 5f; //start value 5f
     public float maxZoom;
 
     public Vector3 boundries1;
@@ -79,7 +80,7 @@ public class MapControl : MonoBehaviour
 
     private void handleTrackpadInput(){
         if(Input.mouseScrollDelta.y != 0){
-             mapCamera.transform.Translate(new Vector3(0, 0, Input.mouseScrollDelta.y * speed/1.5f * Time.deltaTime));
+             mapCamera.transform.Translate(new Vector3(0, 0, Input.mouseScrollDelta.y * zoomSpeed * Time.deltaTime));
         }
 
         Vector3 mouseDelta = Input.mousePosition - lastMouseCoordinate;

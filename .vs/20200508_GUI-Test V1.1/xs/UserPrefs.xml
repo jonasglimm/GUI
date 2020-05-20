@@ -1,21 +1,38 @@
 ﻿<Properties StartupConfiguration="{30A6AA84-5550-8BA3-F49B-BB2B67720BA4}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Fingers/Prefab/Script/Components/FingersZoomPanCameraComponentScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MeineDaten/Scripts/SliderControl/SliderControl.cs">
     <Files>
-      <File FileName="Assets/MeineDaten/Scripts/MapAufgabe/MapControl.cs" Line="154" Column="1" />
-      <File FileName="Assets/MeineDaten/Scripts/MapAufgabe/MapTaskControl.cs" />
-      <File FileName="Assets/Fingers/Prefab/Script/Components/FingersZoomPanCameraComponentScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/MeineDaten/Scripts/MapAufgabe/MapboxTaskControl.cs" Line="260" Column="10" />
+      <File FileName="Assets/MeineDaten/Scripts/MapAufgabe/MapTaskControl.cs" Line="21" Column="1" />
+      <File FileName="Assets/MeineDaten/Scripts/MapAufgabe/MapControl.cs" Line="51" Column="1" />
+      <File FileName="Assets/Mapbox/Unity/Map/AbstractMap.cs" Line="391" Column="19" />
+      <File FileName="Assets/Mapbox/Examples/Scripts/QuadTreeCameraMovement.cs" Line="86" Column="42" />
+      <File FileName="Assets/MeineDaten/Scripts/SliderControl/SliderControl.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="20200508_GUI-Test V1.1" expanded="True">
             <Node name="Assets" expanded="True">
-              <Node name="Fingers" expanded="True">
-                <Node name="Prefab" expanded="True">
-                  <Node name="Script" expanded="True">
-                    <Node name="Components" expanded="True">
-                      <Node name="FingersZoomPanCameraComponentScript.cs" selected="True" />
-                    </Node>
+              <Node name="Mapbox" expanded="True">
+                <Node name="Examples" expanded="True">
+                  <Node name="5_Playground" expanded="True">
+                    <Node name="Scripts" expanded="True" />
+                  </Node>
+                  <Node name="6_ZoomableMap" expanded="True">
+                    <Node name="Scripts" expanded="True" />
+                  </Node>
+                  <Node name="Scripts" expanded="True" />
+                </Node>
+                <Node name="Unity" expanded="True">
+                  <Node name="DataContainers" expanded="True" />
+                  <Node name="Editor" expanded="True">
+                    <Node name="Build" expanded="True" />
+                  </Node>
+                  <Node name="Map" expanded="True">
+                    <Node name="Interfaces" expanded="True" />
+                  </Node>
+                  <Node name="MeshGeneration" expanded="True">
+                    <Node name="Factories" expanded="True" />
                   </Node>
                 </Node>
               </Node>
@@ -24,9 +41,15 @@
                   <Node name="AuswahlAufgabe" expanded="True" />
                   <Node name="BlätterAufgabe" expanded="True">
                     <Node name="BlaetterAufgabe" expanded="True" />
+                    <Node name="BlaetterAufgabeMitTasten" expanded="True" />
                   </Node>
                   <Node name="MapAufgabe" expanded="True" />
-                  <Node name="SliderControl" expanded="True" />
+                  <Node name="ScrollAufgabe" expanded="True">
+                    <Node name="ScrollAufgabeMitTasten" expanded="True" />
+                  </Node>
+                  <Node name="SliderControl" expanded="True">
+                    <Node name="SliderControl.cs" selected="True" />
+                  </Node>
                 </Node>
               </Node>
             </Node>
@@ -37,7 +60,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="333bcfe4-1c45-4fc5-9219-77e8064f8062" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="19dbc935-08ce-4425-92b5-f997e2a730f3" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

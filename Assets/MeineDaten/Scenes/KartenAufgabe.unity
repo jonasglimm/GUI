@@ -707,6 +707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  zoomSpeed: 15
   maxZoom: -1.5
   boundries1: {x: 16.9, y: 11.9, z: -3}
   boundries2: {x: 14.4, y: 10.5, z: -6}
