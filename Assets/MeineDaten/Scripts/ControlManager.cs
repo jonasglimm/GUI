@@ -34,15 +34,19 @@ public class ControlManager : MonoBehaviour
     
     private int errors;
     private bool[] modalities = new bool[4];
+    private int[] taskList = new int[15];
+    private int maxValue = 100;
+    private int currentTask;
     
 // Use this for initialization
     void Start () {
         CheckModalities();
         errors = 0;
-        setRandomName(currentTaskTextField.text);
         taskNumber = 1;
-        taskTextField.text = taskNumber.ToString() + "/"+totalTasks.ToString();
+        taskTextField.text = taskNumber.ToString() + " / "+totalTasks.ToString();
         errorCountTextField.text = errors.ToString();
+        CreateTaskOrder();
+        NewTask();
     }
 
     public void CheckModalities() // Check if exactly one modality is set to active
@@ -67,18 +71,59 @@ public class ControlManager : MonoBehaviour
         }
     }
 
-    void setRandomName(string oldText){
-        while(currentTaskTextField.text == oldText){
-            int randIndex =  Random.Range(1, tasks.Length);
-            currentTaskTextField.text = tasks[randIndex-1];
+    private void NewTask()
+    {
+        int factor = taskNumber / taskList.Length; //start from the top of the list after counting through it
+        if (taskNumber - (factor * taskList.Length) != 0)
+        {
+            if (currentTask != taskList[taskNumber - (factor * taskList.Length) - 1]) // prevent that the same name needs to be selected twice im a row
+            {
+                currentTask = taskList[taskNumber - (factor * taskList.Length) - 1];
+            }
+            else if (currentTask != taskList[taskNumber - (factor * taskList.Length) - 2]) // prevent that the same name needs to be selected twice im a row
+            {
+                currentTask = taskList[taskNumber - (factor * taskList.Length) - 2];
+            }
+            else if (currentTask != taskList[taskNumber - (factor * taskList.Length) - 3]) // prevent that the same name needs to be selected twice im a row
+            {
+                currentTask = taskList[taskNumber - (factor * taskList.Length) - 3];
+            }
         }
+        else
+        {
+            currentTask = taskList[taskNumber / factor - 1];
+        }
+
+        currentTaskTextField.text = currentTask.ToString();
     }
+
+
+    private void CreateTaskOrder() //Ramdom Order depending on the number of names
+{
+        //needs to be the same as in SliderTask
+        taskList[0] = maxValue * 4 / 7;
+        taskList[1] = maxValue * 7 / 9;
+        taskList[2] = maxValue / 4 + 1;
+        taskList[3] = maxValue * 3 / 5;
+        taskList[4] = maxValue * 6 / 7;
+        taskList[5] = maxValue * 2 / 9;
+        taskList[6] = maxValue * 3 / 4;
+        taskList[7] = maxValue * 2 / 7;
+        taskList[8] = maxValue / 3;
+        taskList[9] = maxValue * 5 / 6;
+        taskList[10] = maxValue / 2;
+        taskList[11] = maxValue * 1 / 8;
+        taskList[12] = maxValue / 4;
+        taskList[13] = maxValue * 8 / 10;
+        taskList[14] = maxValue * 3 / 10;
+}
+    
     void updateValues(){
         //show success screen
         StartCoroutine(showSuccessFeedback());
-        setRandomName(currentTaskTextField.text);
         taskNumber++;
-        taskTextField.text = taskNumber.ToString() + "/"+totalTasks;
+        NewTask();
+        taskTextField.text = taskNumber.ToString() + " / "+totalTasks;
     }
 
      IEnumerator showSuccessFeedback(){

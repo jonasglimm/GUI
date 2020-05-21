@@ -746,7 +746,7 @@ PrefabInstance:
     - target: {fileID: 3305670148686694547, guid: 78c57297dcc8d41c19fe59d86d5ee023,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000061035156
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3305670148686694547, guid: 78c57297dcc8d41c19fe59d86d5ee023,
         type: 3}
@@ -2404,13 +2404,14 @@ MonoBehaviour:
   errorScreen: {fileID: 619093192}
   successScreen: {fileID: 507170336}
   completionScreen: {fileID: 417443667}
-  totalTasks: 2
+  totalTasks: 50
   activeTime: 0.5
   touchscreenInput: 0
   touchpadInput: 0
   iDriveInput: 1
   gestureInput: 0
   modalityWarning: {fileID: 1908381636}
+  cursorResetTime: 0
   clickSound: {fileID: 1658747174}
 --- !u!224 &1658747173
 RectTransform:
