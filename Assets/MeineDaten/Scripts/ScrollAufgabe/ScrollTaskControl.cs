@@ -104,7 +104,7 @@ public class ScrollTaskControl : MonoBehaviour
         }
         else
         {
-            listenEintrag = aufgabenListe[aufgabenNr / factor];
+            listenEintrag = aufgabenListe[aufgabenNr / factor - 1];
         }
         gesuchterName = buttonListControl.names[listenEintrag];
     }
@@ -116,7 +116,7 @@ public class ScrollTaskControl : MonoBehaviour
         aufgabenListe[2] = namesLength / 4 + 1;
         aufgabenListe[3] = 1;
         aufgabenListe[4] = namesLength - 1;
-        aufgabenListe[5] = namesLength - (namesLength / 4);
+        aufgabenListe[5] = namesLength * 2/9;
         aufgabenListe[6] = namesLength * 3/4;
         aufgabenListe[7] = 2;
         aufgabenListe[8] = namesLength / 3;
@@ -124,7 +124,7 @@ public class ScrollTaskControl : MonoBehaviour
         aufgabenListe[10] = namesLength / 2;
         aufgabenListe[11] = namesLength / 2 + 2;
         aufgabenListe[12] = namesLength / 4;
-        aufgabenListe[13] = namesLength * 1/4;
+        aufgabenListe[13] = namesLength * 5/6;
         aufgabenListe[14] = namesLength - 1;
     }
 

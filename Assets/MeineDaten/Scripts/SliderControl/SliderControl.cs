@@ -29,6 +29,8 @@ public class SliderControl : MonoBehaviour
     private int fehlercounter;
     private int aufgabenNr;
 
+    private int[] aufgabenListe = new int[15]; 
+
     private int endOfScale;
 
     private Vector3 lastMouseCoordinate = Vector3.zero;
@@ -42,15 +44,16 @@ public class SliderControl : MonoBehaviour
         clickSound = GameObject.Find("ClickSound").GetComponent<AudioSource>();
 
         endOfScale = startSliderTask.endOfScale;
+        CreateTaskOrder();
     }
 
     void Start()
     {
-        valueSlider.maxValue = endOfScale;
-        valueSlider.value = endOfScale / 2;
-        NeueAufgabenstellung();
         fehlercounter = 0;
         aufgabenNr = 1;
+        valueSlider.maxValue = endOfScale;
+        valueSlider.value = endOfScale / 2;
+        NewTask();
 
         if(valueControlCenter.touchpadInput == false){
             ColorBlock colorVar = valueSlider.colors;
@@ -113,7 +116,7 @@ public class SliderControl : MonoBehaviour
             if (aufgabenNr >= valueControlCenter.numberOfTasks){
                 EndScreen();
             }
-            NeueAufgabenstellung();
+            NewTask();
         } else {
             fehlercounter++;
             StartCoroutine(FeedbackWrong());
@@ -131,13 +134,50 @@ public class SliderControl : MonoBehaviour
             panelWrong.SetActive(false);
         }
     }
-    public void NeueAufgabenstellung(){
-        neueAufgabenstellung = Random.Range(0, endOfScale + 1);
-        while (neueAufgabenstellung == aufgabenstellung){
-            neueAufgabenstellung = Random.Range(0, endOfScale +1);
-        }
-        aufgabenstellung = neueAufgabenstellung;
+
+    private void CreateTaskOrder() //Ramdom Order depending on the number of names
+    {
+        aufgabenListe[0] = endOfScale * 4 / 7;
+        aufgabenListe[1] = endOfScale * 7 / 9;
+        aufgabenListe[2] = endOfScale / 4 + 1;
+        aufgabenListe[3] = endOfScale * 3/5;
+        aufgabenListe[4] = endOfScale * 6/7;
+        aufgabenListe[5] = endOfScale * 2/9;
+        aufgabenListe[6] = endOfScale * 3 / 4;
+        aufgabenListe[7] = endOfScale * 2 / 7;
+        aufgabenListe[8] = endOfScale / 3;
+        aufgabenListe[9] = endOfScale * 5/6;
+        aufgabenListe[10] = endOfScale / 2;
+        aufgabenListe[11] = endOfScale * 1/8;
+        aufgabenListe[12] = endOfScale / 4;
+        aufgabenListe[13] = endOfScale * 8/10;
+        aufgabenListe[14] = endOfScale * 3/10;
     }
+
+    private void NewTask()
+    {
+        int factor = aufgabenNr / aufgabenListe.Length; //start from the top of the list after counting through it
+        if (aufgabenNr - (factor * aufgabenListe.Length) != 0)
+        {
+            if (aufgabenstellung != aufgabenListe[aufgabenNr - (factor * aufgabenListe.Length) - 1]) // prevent that the same name needs to be selected twice im a row
+            {
+                aufgabenstellung = aufgabenListe[aufgabenNr - (factor * aufgabenListe.Length) - 1];
+            }
+            else if (aufgabenstellung != aufgabenListe[aufgabenNr - (factor * aufgabenListe.Length) - 2]) // prevent that the same name needs to be selected twice im a row
+            {
+                aufgabenstellung = aufgabenListe[aufgabenNr - (factor * aufgabenListe.Length) - 2];
+            }
+            else if (aufgabenstellung != aufgabenListe[aufgabenNr - (factor * aufgabenListe.Length) - 3]) // prevent that the same name needs to be selected twice im a row
+            {
+                aufgabenstellung = aufgabenListe[aufgabenNr - (factor * aufgabenListe.Length) - 3];
+            }
+        }
+        else
+        {
+            aufgabenstellung = aufgabenListe[aufgabenNr / factor - 1];
+        }
+    }
+
 
     public void EndScreen(){
         endPanel.SetActive(true);

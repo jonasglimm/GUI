@@ -130,7 +130,7 @@ public class BlaetterControl : MonoBehaviour
         seitenzahlListe[10] = pagesLength / 2;
         seitenzahlListe[11] = pagesLength / 2 + 2;
         seitenzahlListe[12] = pagesLength/4;
-        seitenzahlListe[13] = pagesLength * 1 / 4;
+        seitenzahlListe[13] = pagesLength * 5/6;
         seitenzahlListe[14] = pagesLength - 1;
     }
 
@@ -155,7 +155,7 @@ public class BlaetterControl : MonoBehaviour
         }
         else
         {
-            seitenzahl = seitenzahlListe[aufgabenNr / factor];
+            seitenzahl = seitenzahlListe[aufgabenNr / factor - 1];
         }
 
         if (seitenzahl == pagesLength) // the first Button is not included within the array and needs to be included like this
