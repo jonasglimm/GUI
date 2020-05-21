@@ -130,25 +130,32 @@ public class BlaetterControl : MonoBehaviour
         seitenzahlListe[10] = pagesLength / 2;
         seitenzahlListe[11] = pagesLength / 2 + 2;
         seitenzahlListe[12] = pagesLength/4;
-        seitenzahlListe[13] = pagesLength;
+        seitenzahlListe[13] = pagesLength * 1 / 4;
         seitenzahlListe[14] = pagesLength - 1;
     }
 
     // functions to select a random page as the new button to press
     public void SetGesuchteSeite()
     {
-        int factor = aufgabenNr / seitenzahlListe.Length; //start from the top of the list after counting through it 
-        if (seitenzahl != seitenzahlListe[aufgabenNr - (factor * seitenzahlListe.Length) - 1]) // prevent that the same button (page) need to be selected twice im a row
+        int factor = aufgabenNr / seitenzahlListe.Length; //start from the top of the list after counting through it
+        if (aufgabenNr - (factor * seitenzahlListe.Length) != 0)
         {
-            seitenzahl = seitenzahlListe[aufgabenNr - (factor * seitenzahlListe.Length) - 1];
+            if (seitenzahl != seitenzahlListe[aufgabenNr - (factor * seitenzahlListe.Length) - 1]) // prevent that the same button (page) need to be selected twice im a row
+            {
+                seitenzahl = seitenzahlListe[aufgabenNr - (factor * seitenzahlListe.Length) - 1];
+            }
+            else if (seitenzahl != seitenzahlListe[aufgabenNr - (factor * seitenzahlListe.Length) - 2]) // prevent that the same button (page) need to be selected twice im a row
+            {
+                seitenzahl = seitenzahlListe[aufgabenNr - (factor * seitenzahlListe.Length) - 2];
+            }
+            else if (seitenzahl != seitenzahlListe[aufgabenNr - (factor * seitenzahlListe.Length) - 3]) // prevent that the same button (page) need to be selected twice im a row
+            {
+                seitenzahl = seitenzahlListe[aufgabenNr - (factor * seitenzahlListe.Length) - 3];
+            }
         }
-        else if (seitenzahl != seitenzahlListe[aufgabenNr - (factor * seitenzahlListe.Length) - 2]) // prevent that the same button (page) need to be selected twice im a row
+        else
         {
-            seitenzahl = seitenzahlListe[aufgabenNr - (factor * seitenzahlListe.Length) - 2];
-        }
-        else if (seitenzahl != seitenzahlListe[aufgabenNr - (factor * seitenzahlListe.Length) - 3]) // prevent that the same button (page) need to be selected twice im a row
-        {
-            seitenzahl = seitenzahlListe[aufgabenNr - (factor * seitenzahlListe.Length) - 3];
+            seitenzahl = seitenzahlListe[aufgabenNr / factor];
         }
 
         if (seitenzahl == pagesLength) // the first Button is not included within the array and needs to be included like this

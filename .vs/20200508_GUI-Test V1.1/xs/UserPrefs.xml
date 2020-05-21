@@ -1,10 +1,11 @@
 ﻿<Properties StartupConfiguration="{30A6AA84-5550-8BA3-F49B-BB2B67720BA4}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MeineDaten/Scripts/BlätterAufgabe/BlaetterAufgabe/BlaetterControl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MeineDaten/Scripts/ScrollAufgabe/ScrollTaskControl.cs">
     <Files>
       <File FileName="Assets/MeineDaten/Scripts/TrackpadTextInsertion/TrackpadTextInsertion.cs" Line="189" Column="40" />
       <File FileName="Assets/MeineDaten/Scripts/ControlManager.cs" Line="72" Column="50" />
-      <File FileName="Assets/MeineDaten/Scripts/AuswahlAufgabe/AuswahlControl.cs" Line="133" Column="90" />
-      <File FileName="Assets/MeineDaten/Scripts/BlätterAufgabe/BlaetterAufgabe/BlaetterControl.cs" Line="160" Column="92" />
+      <File FileName="Assets/MeineDaten/Scripts/AuswahlAufgabe/AuswahlControl.cs" Line="130" Column="37" />
+      <File FileName="Assets/MeineDaten/Scripts/BlätterAufgabe/BlaetterAufgabe/BlaetterControl.cs" Line="117" Column="1" />
+      <File FileName="Assets/MeineDaten/Scripts/ScrollAufgabe/ScrollTaskControl.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -38,14 +39,13 @@
                 <Node name="Scripts" expanded="True">
                   <Node name="AuswahlAufgabe" expanded="True" />
                   <Node name="BlätterAufgabe" expanded="True">
-                    <Node name="BlaetterAufgabe" expanded="True">
-                      <Node name="BlaetterControl.cs" selected="True" />
-                    </Node>
+                    <Node name="BlaetterAufgabe" expanded="True" />
                     <Node name="BlaetterAufgabeMitTasten" expanded="True" />
                   </Node>
                   <Node name="MapAufgabe" expanded="True" />
                   <Node name="ScrollAufgabe" expanded="True">
                     <Node name="ScrollAufgabeMitTasten" expanded="True" />
+                    <Node name="ScrollTaskControl.cs" selected="True" />
                   </Node>
                   <Node name="SliderControl" expanded="True" />
                   <Node name="TrackpadTextInsertion" expanded="True" />

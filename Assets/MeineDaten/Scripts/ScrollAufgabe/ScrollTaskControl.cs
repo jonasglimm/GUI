@@ -23,7 +23,8 @@ public class ScrollTaskControl : MonoBehaviour
     public AudioSource clickSound;
 
     private string gesuchterName;
-    private string neuerName;
+    private int listenEintrag;
+    private int[] aufgabenListe = new int[15];
 
     private int fehlercounter;
     private int aufgabenNr;
@@ -43,9 +44,10 @@ public class ScrollTaskControl : MonoBehaviour
         activeTime = valueControlCenter.feedbackPanelTime;
         anzahlAufgaben = valueControlCenter.numberOfTasks;
         namesLength = buttonListControl.names.Length;
-        gesuchterName = buttonListControl.names[Random.Range(0, namesLength)];
         fehlercounter = 0;
         aufgabenNr = 1;
+        CreateTaskOrder();
+        NewTask();
     }
 
     private void Update()
@@ -72,15 +74,7 @@ public class ScrollTaskControl : MonoBehaviour
         {
             aufgabenNr++;
             StartCoroutine(FeedbackCorrect());
-
-            neuerName = buttonListControl.names[Random.Range(0, namesLength)];
-
-            while (neuerName == gesuchterName)
-            {
-                neuerName = buttonListControl.names[Random.Range(0, namesLength)];
-            }
-
-            gesuchterName = neuerName;
+            NewTask();
         }
 
         else
@@ -88,8 +82,54 @@ public class ScrollTaskControl : MonoBehaviour
             fehlercounter++;
             StartCoroutine(FeedbackWrong());
         }
+    }
 
-        IEnumerator FeedbackCorrect()
+    private void NewTask()
+    {
+        int factor = aufgabenNr / aufgabenListe.Length; //start from the top of the list after counting through it
+        if (aufgabenNr - (factor * aufgabenListe.Length) != 0)
+        {
+            if (listenEintrag != aufgabenListe[aufgabenNr - (factor * aufgabenListe.Length) - 1]) // prevent that the same name needs to be selected twice im a row
+            {
+                listenEintrag = aufgabenListe[aufgabenNr - (factor * aufgabenListe.Length) - 1];
+            }
+            else if (listenEintrag != aufgabenListe[aufgabenNr - (factor * aufgabenListe.Length) - 2]) // prevent that the same name needs to be selected twice im a row
+            {
+                listenEintrag = aufgabenListe[aufgabenNr - (factor * aufgabenListe.Length) - 2];
+            }
+            else if (listenEintrag != aufgabenListe[aufgabenNr - (factor * aufgabenListe.Length) - 3]) // prevent that the same name needs to be selected twice im a row
+            {
+                listenEintrag = aufgabenListe[aufgabenNr - (factor * aufgabenListe.Length) - 3];
+            }
+        }
+        else
+        {
+            listenEintrag = aufgabenListe[aufgabenNr / factor];
+        }
+        gesuchterName = buttonListControl.names[listenEintrag];
+    }
+
+    private void CreateTaskOrder() //Ramdom Order depending on the number of names
+    {
+        aufgabenListe[0] = namesLength / 2 + 1;
+        aufgabenListe[1] = namesLength - 2;
+        aufgabenListe[2] = namesLength / 4 + 1;
+        aufgabenListe[3] = 1;
+        aufgabenListe[4] = namesLength - 1;
+        aufgabenListe[5] = namesLength - (namesLength / 4);
+        aufgabenListe[6] = namesLength * 3/4;
+        aufgabenListe[7] = 2;
+        aufgabenListe[8] = namesLength / 3;
+        aufgabenListe[9] = namesLength - 3;
+        aufgabenListe[10] = namesLength / 2;
+        aufgabenListe[11] = namesLength / 2 + 2;
+        aufgabenListe[12] = namesLength / 4;
+        aufgabenListe[13] = namesLength * 1/4;
+        aufgabenListe[14] = namesLength - 1;
+    }
+
+
+    IEnumerator FeedbackCorrect()
         {
             panelCorrect.SetActive(true);
             yield return new WaitForSecondsRealtime(activeTime);
@@ -108,7 +148,6 @@ public class ScrollTaskControl : MonoBehaviour
             panelWrong.SetActive(false);
         }
 
-    }
     public void EndScreen()
     {
         endPanel.SetActive(true);
