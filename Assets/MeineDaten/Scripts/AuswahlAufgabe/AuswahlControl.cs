@@ -123,22 +123,8 @@ public class AuswahlControl : MonoBehaviour
 
     private void NewTask() //Declare next Button to be pressed
     {
-        if (aufgabenNr <= aufgabenListe.Length)
-        {
-            aufgabenstellung = aufgabenListe[aufgabenNr - 1];
-        }
-        else if (aufgabenNr <= 2 * aufgabenListe.Length)
-        {
-            aufgabenstellung = aufgabenListe[aufgabenNr - aufgabenListe.Length - 1];
-        }
-        else if (aufgabenNr <= 3 * aufgabenListe.Length)
-        {
-            aufgabenstellung = aufgabenListe[aufgabenNr - 2 * aufgabenListe.Length - 1];
-        }
-        else if (aufgabenNr <= 4 * aufgabenListe.Length)
-        {
-            Debug.Log("Längere Aufgabenliste erstellen!");
-        }
+        int factor = aufgabenNr / aufgabenListe.Length;
+        aufgabenstellung = aufgabenListe[aufgabenNr - (factor * aufgabenListe.Length) - 1];
     }
 
     //Endscreen to show the endpanel

@@ -27,8 +27,8 @@ public class BlaetterControl : MonoBehaviour
 
     // Private variables to use within the calculations
     private string gesuchteSeite;
-    private string neueSeite;
     private int seitenzahl;
+    private int[] seitenzahlListe = new int[15];
 
     private int fehlercounter;
     private int aufgabenNr;
@@ -52,12 +52,12 @@ public class BlaetterControl : MonoBehaviour
 
     void Start()
     {
-        pagesLength = buttonListBlaettern.pages.Length;
-        SetGesuchteSeite();
         // Starting to count mistakes and tasks
         fehlercounter = 0;
         aufgabenNr = 1;
-
+        pagesLength = buttonListBlaettern.pages.Length;
+        CreateTaskOrder();
+        SetGesuchteSeite();
     }
 
     //The correct text is assigned to the different textelements shown on the Canvas
@@ -87,7 +87,6 @@ public class BlaetterControl : MonoBehaviour
             aufgabenNr++;
             StartCoroutine(FeedbackCorrect());
             SetGesuchteSeite();
-           
         }
 
         else
@@ -116,24 +115,50 @@ public class BlaetterControl : MonoBehaviour
         }
     }
 
+    private void CreateTaskOrder() //Ramdom Order depending on the number of pages
+    {
+        seitenzahlListe[0] = pagesLength / 2 + 1 ;
+        seitenzahlListe[1] = pagesLength - 2;
+        seitenzahlListe[2] = pagesLength / 4 + 1;
+        seitenzahlListe[3] = 1;
+        seitenzahlListe[4] = pagesLength - 1;
+        seitenzahlListe[5] = pagesLength - (pagesLength/4);
+        seitenzahlListe[6] = pagesLength;
+        seitenzahlListe[7] = 2;
+        seitenzahlListe[8] = pagesLength / 3;
+        seitenzahlListe[9] = pagesLength - 2;
+        seitenzahlListe[10] = pagesLength / 2;
+        seitenzahlListe[11] = pagesLength / 2 + 2;
+        seitenzahlListe[12] = pagesLength/4;
+        seitenzahlListe[13] = pagesLength;
+        seitenzahlListe[14] = pagesLength - 1;
+    }
+
     // functions to select a random page as the new button to press
     public void SetGesuchteSeite()
     {
-        gesuchteSeite = neueSeite;
-        while (neueSeite == gesuchteSeite) // prevent that the same button (page) need to be selected twice im a row
+        int factor = aufgabenNr / seitenzahlListe.Length; //start from the top of the list after counting through it 
+        if (seitenzahl != seitenzahlListe[aufgabenNr - (factor * seitenzahlListe.Length) - 1]) // prevent that the same button (page) need to be selected twice im a row
         {
-            seitenzahl = Random.Range(0, pagesLength); 
-
-            if (seitenzahl == pagesLength) // the first Button is not included within the array and needs to be included like this
-            {
-                neueSeite = firstButtonText.text;
-            }
-            else
-            {
-                neueSeite = buttonListBlaettern.pages[seitenzahl];
-            }
+            seitenzahl = seitenzahlListe[aufgabenNr - (factor * seitenzahlListe.Length) - 1];
         }
-        gesuchteSeite = neueSeite;
+        else if (seitenzahl != seitenzahlListe[aufgabenNr - (factor * seitenzahlListe.Length) - 2]) // prevent that the same button (page) need to be selected twice im a row
+        {
+            seitenzahl = seitenzahlListe[aufgabenNr - (factor * seitenzahlListe.Length) - 2];
+        }
+        else if (seitenzahl != seitenzahlListe[aufgabenNr - (factor * seitenzahlListe.Length) - 3]) // prevent that the same button (page) need to be selected twice im a row
+        {
+            seitenzahl = seitenzahlListe[aufgabenNr - (factor * seitenzahlListe.Length) - 3];
+        }
+
+        if (seitenzahl == pagesLength) // the first Button is not included within the array and needs to be included like this
+            {
+                gesuchteSeite = firstButtonText.text;
+            }
+        else
+            {
+                gesuchteSeite = buttonListBlaettern.pages[seitenzahl];
+            }
     }
 
     //activates the endpanel
