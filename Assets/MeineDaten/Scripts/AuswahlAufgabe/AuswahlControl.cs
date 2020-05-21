@@ -25,7 +25,7 @@ public class AuswahlControl : MonoBehaviour
 
     // Private variables to use within the calculations
     private int aufgabenstellung;
-    private int neueAufgabenstellung;
+    private int[] aufgabenListe = { 3, 1, 4, 2, 5, 1, 6, 4, 1, 5, 4, 2, 4, 6, 1, 3, 1, 4, 2, 5, 1, 6, 4, 1, 5, 4, 2, 4, 6, 1 };
     private int fehlercounter;
     private int aufgabenNr;
 
@@ -53,10 +53,10 @@ public class AuswahlControl : MonoBehaviour
 
     void Start()
     {
-        aufgabenstellung = Random.Range(1, 7); //Which Button should be pressed?
+        aufgabenNr = 1;
+        NewTask(); //Which Button should be pressed?
         // Starting to count mistakes and tasks
         fehlercounter = 0;
-        aufgabenNr = 1;
 
         // if direct touch is used, the selected color is changed to blue
          if (directTouchInput == true) 
@@ -90,21 +90,14 @@ public class AuswahlControl : MonoBehaviour
         if (btn.name == aufgabenstellung.ToString())
         {
             StartCoroutine(FeedbackCorrect());
-
             aufgabenNr++;
+
             if(aufgabenNr >= anzahlAufgaben) // if task counter reaches the max number of task, the endscreem is called
             {
                 EndScreen();
             }
 
-            neueAufgabenstellung = Random.Range(1, 7);
-
-            while (neueAufgabenstellung == aufgabenstellung)
-            {
-                neueAufgabenstellung = Random.Range(1, 7);
-            }
-
-            aufgabenstellung = neueAufgabenstellung;
+            NewTask();
         }
 
         else
@@ -126,8 +119,28 @@ public class AuswahlControl : MonoBehaviour
             yield return new WaitForSecondsRealtime(activeTime);
             panelWrong.SetActive(false);
         }
-
     }
+
+    private void NewTask() //Declare next Button to be pressed
+    {
+        if (aufgabenNr <= aufgabenListe.Length)
+        {
+            aufgabenstellung = aufgabenListe[aufgabenNr - 1];
+        }
+        else if (aufgabenNr <= 2 * aufgabenListe.Length)
+        {
+            aufgabenstellung = aufgabenListe[aufgabenNr - aufgabenListe.Length - 1];
+        }
+        else if (aufgabenNr <= 3 * aufgabenListe.Length)
+        {
+            aufgabenstellung = aufgabenListe[aufgabenNr - 2 * aufgabenListe.Length - 1];
+        }
+        else if (aufgabenNr <= 4 * aufgabenListe.Length)
+        {
+            Debug.Log("Längere Aufgabenliste erstellen!");
+        }
+    }
+
     //Endscreen to show the endpanel
     public void EndScreen() {
         endPanel.SetActive(true);
