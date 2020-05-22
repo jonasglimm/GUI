@@ -6,7 +6,9 @@ using TMPro;
 public class ControlManager : MonoBehaviour
 {
     [Header("Task Values")]
+    public bool taskIsTextInput;
     public string[] tasks;
+    public int maxValue =100;
 
     [Header("GUI Elements")]
     public TextMeshProUGUI taskTextField;
@@ -35,8 +37,8 @@ public class ControlManager : MonoBehaviour
     private int errors;
     private bool[] modalities = new bool[4];
     private int[] taskList = new int[15];
-    private int maxValue = 100;
-    private int currentTask;
+    private int currentTaskNumber;
+    private int lastTaskElement;
     
 // Use this for initialization
     void Start () {
@@ -76,25 +78,47 @@ public class ControlManager : MonoBehaviour
         int factor = taskNumber / taskList.Length; //start from the top of the list after counting through it
         if (taskNumber - (factor * taskList.Length) != 0)
         {
-            if (currentTask != taskList[taskNumber - (factor * taskList.Length) - 1]) // prevent that the same name needs to be selected twice im a row
+            if (currentTaskNumber != taskList[taskNumber - (factor * taskList.Length) - 1]) // prevent that the same name needs to be selected twice im a row
             {
-                currentTask = taskList[taskNumber - (factor * taskList.Length) - 1];
+                currentTaskNumber = taskList[taskNumber - (factor * taskList.Length) - 1];
             }
-            else if (currentTask != taskList[taskNumber - (factor * taskList.Length) - 2]) // prevent that the same name needs to be selected twice im a row
+            else if (currentTaskNumber != taskList[taskNumber - (factor * taskList.Length) - 2]) // prevent that the same name needs to be selected twice im a row
             {
-                currentTask = taskList[taskNumber - (factor * taskList.Length) - 2];
+                currentTaskNumber = taskList[taskNumber - (factor * taskList.Length) - 2];
             }
-            else if (currentTask != taskList[taskNumber - (factor * taskList.Length) - 3]) // prevent that the same name needs to be selected twice im a row
+            else if (currentTaskNumber != taskList[taskNumber - (factor * taskList.Length) - 3]) // prevent that the same name needs to be selected twice im a row
             {
-                currentTask = taskList[taskNumber - (factor * taskList.Length) - 3];
+                currentTaskNumber = taskList[taskNumber - (factor * taskList.Length) - 3];
             }
         }
         else
         {
-            currentTask = taskList[taskNumber / factor - 1];
+            currentTaskNumber = taskList[taskNumber / factor - 1];
         }
 
-        currentTaskTextField.text = currentTask.ToString();
+        if (taskIsTextInput == false)
+        {
+            currentTaskTextField.text = currentTaskNumber.ToString();
+        }
+        else
+        {
+            int currentTaskElement = currentTaskNumber * tasks.Length / maxValue;
+            currentTaskTextField.text = tasks[currentTaskElement];
+
+            while (currentTaskElement == lastTaskElement)
+            {
+                if(currentTaskElement == tasks.Length - 1)
+                {
+                    currentTaskElement--;
+                }
+                else
+                {
+                    currentTaskElement++;
+                }
+            }
+            currentTaskTextField.text = tasks[currentTaskElement];
+            lastTaskElement = currentTaskElement;
+        }
     }
 
 

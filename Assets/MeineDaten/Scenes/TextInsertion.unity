@@ -285,6 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 503f73444acd747c398436fe662aa44c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskIsTextInput: 1
   tasks:
   - Alice
   - Bob
@@ -296,6 +297,7 @@ MonoBehaviour:
   - Hanna
   - Alex
   - Caroline
+  maxValue: 100
   taskTextField: {fileID: 1743249807}
   errorCountTextField: {fileID: 870628645}
   currentTaskTextField: {fileID: 1691099224}
@@ -5695,7 +5697,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_textAlignment: 514
+  m_textAlignment: 513
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -5776,8 +5778,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -133, y: 26.4}
-  m_SizeDelta: {x: 77.5, y: 132.8}
+  m_AnchoredPosition: {x: -115.7, y: 26.4}
+  m_SizeDelta: {x: 148.29, y: 132.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1752475934
 GameObject:
