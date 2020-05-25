@@ -1,10 +1,13 @@
 ﻿<Properties StartupConfiguration="{30A6AA84-5550-8BA3-F49B-BB2B67720BA4}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MeineDaten/Scripts/ControlManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MeineDaten/Scripts/MainMenu.cs">
     <Files>
       <File FileName="Assets/MeineDaten/Scripts/SliderControl/SliderControl.cs" Line="153" Column="47" />
-      <File FileName="Assets/MeineDaten/Scripts/AuswahlAufgabe/AuswahlControl.cs" />
+      <File FileName="Assets/MeineDaten/Scripts/AuswahlAufgabe/AuswahlControl.cs" Line="1" Column="1" />
       <File FileName="Assets/MeineDaten/Scripts/AuswahlAufgabe/AuswahlTrackpad.cs" Line="141" Column="20" />
-      <File FileName="Assets/MeineDaten/Scripts/ControlManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/MeineDaten/Scripts/ControlManager.cs" Line="121" Column="1" />
+      <File FileName="Assets/MeineDaten/Scripts/ValueControlCenter.cs" Line="1" Column="1" />
+      <File FileName="Assets/Mapbox/Unity/Map/AbstractMap.cs" Line="1" Column="1" />
+      <File FileName="Assets/MeineDaten/Scripts/MainMenu.cs" Line="4" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -48,7 +51,7 @@
                   <Node name="SliderControl" expanded="True" />
                   <Node name="TrackpadTextInsertion" expanded="True" />
                   <Node name="ValueManipulation" expanded="True" />
-                  <Node name="ControlManager.cs" selected="True" />
+                  <Node name="MainMenu.cs" selected="True" />
                 </Node>
               </Node>
             </Node>
@@ -59,7 +62,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="7946cf9e-fa42-4836-afb3-9d490d5d9922" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="fe0977fa-2e0c-4722-8344-c2eb1262a672" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
