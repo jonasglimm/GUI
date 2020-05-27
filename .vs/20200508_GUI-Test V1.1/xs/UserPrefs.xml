@@ -1,13 +1,15 @@
 ﻿<Properties StartupConfiguration="{30A6AA84-5550-8BA3-F49B-BB2B67720BA4}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Mapbox/Unity/Map/AbstractMap.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MeineDaten/Scripts/BlätterAufgabe/BlaetterAufgabe/BlaetterRectMovement.cs">
     <Files>
       <File FileName="Assets/MeineDaten/Scripts/SliderControl/SliderControl.cs" Line="153" Column="47" />
-      <File FileName="Assets/MeineDaten/Scripts/AuswahlAufgabe/AuswahlControl.cs" Line="1" Column="1" />
-      <File FileName="Assets/MeineDaten/Scripts/AuswahlAufgabe/AuswahlTrackpad.cs" Line="141" Column="20" />
-      <File FileName="Assets/MeineDaten/Scripts/ControlManager.cs" Line="121" Column="1" />
-      <File FileName="Assets/MeineDaten/Scripts/ValueControlCenter.cs" Line="1" Column="1" />
+      <File FileName="Assets/MeineDaten/Scripts/AuswahlAufgabe/AuswahlControl.cs" />
+      <File FileName="Assets/MeineDaten/Scripts/AuswahlAufgabe/AuswahlTrackpad.cs" />
+      <File FileName="Assets/MeineDaten/Scripts/ControlManager.cs" />
+      <File FileName="Assets/MeineDaten/Scripts/ValueControlCenter.cs" />
       <File FileName="Assets/Mapbox/Unity/Map/AbstractMap.cs" Line="1" Column="1" />
-      <File FileName="Assets/MeineDaten/Scripts/MainMenu.cs" Line="13" Column="1" />
+      <File FileName="Assets/MeineDaten/Scripts/MainMenu.cs" />
+      <File FileName="Assets/MeineDaten/Scripts/BlätterAufgabe/BlaetterAufgabe/BlaetterControl.cs" Line="1" Column="1" />
+      <File FileName="Assets/MeineDaten/Scripts/BlätterAufgabe/BlaetterAufgabe/BlaetterRectMovement.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -31,7 +33,6 @@
                   </Node>
                   <Node name="Map" expanded="True">
                     <Node name="Interfaces" expanded="True" />
-                    <Node name="AbstractMap.cs" selected="True" />
                   </Node>
                   <Node name="MeshGeneration" expanded="True">
                     <Node name="Factories" expanded="True" />
@@ -42,7 +43,9 @@
                 <Node name="Scripts" expanded="True">
                   <Node name="AuswahlAufgabe" expanded="True" />
                   <Node name="BlätterAufgabe" expanded="True">
-                    <Node name="BlaetterAufgabe" expanded="True" />
+                    <Node name="BlaetterAufgabe" expanded="True">
+                      <Node name="BlaetterRectMovement.cs" selected="True" />
+                    </Node>
                     <Node name="BlaetterAufgabeMitTasten" expanded="True" />
                   </Node>
                   <Node name="MapAufgabe" expanded="True" />
@@ -62,7 +65,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="fe0977fa-2e0c-4722-8344-c2eb1262a672" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="e5fff45c-20db-42d2-90d8-9ce4255a2cec" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
